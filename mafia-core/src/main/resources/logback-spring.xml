@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scope="context" name="logger.name" source="logger.name"/>
+    <springProperty scope="context" name="logger.logRoot" source="logger.logRoot"/>
+    <springProperty scope="context" name="logger.logLevel" source="logger.logLevel"/>
+    <property name="logger.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{60} - %msg%n" />
+    <property name="logger.charset" value="UTF-8" />
+    <property name="logger.maxHistory" value="30" />
+    <property name="logger.maxFileSize" value="512MB" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>${logger.pattern}</Pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE-DEFAULT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logger.logRoot}/${logger.name}.log</File>
+        <encoder>
+            <Pattern>${logger.pattern}</Pattern>
+            <charset>${logger.charset}</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logger.logRoot}/${logger.name}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxHistory>${logger.maxHistory}</maxHistory>
+            <TimeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${logger.maxFileSize}</maxFileSize>
+            </TimeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-DEFAULT"/>
+    </root>
+    <logger level="${logger.logLevel}" name="com.mi.maf" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE-DEFAULT"/>
+    </logger>
+</configuration>
