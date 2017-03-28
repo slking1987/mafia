@@ -49,3 +49,6 @@ mafia-srv-* 业务模块，可自行扩展，编写具体的业务逻辑实现
 
 > * 枚举类型与数据库中保存的类型映射使用MyBatis转换，通过自定义的`com/vb/mafia/core/config/EnumTypeHandler.java`实现tinyInt到枚举类型的转换；
 实现枚举类需要实现接口MafEnum，然后将枚举类添加到`mybatis-config.xml`中，实现id到枚举类型的转换
+
+### 10.待开发
+1.集成后台管理页面

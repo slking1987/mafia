@@ -5,6 +5,7 @@ import com.vb.mafia.api.request.demo.DemoGetListReq;
 import com.vb.mafia.api.request.demo.DemoInsertReq;
 import com.vb.mafia.api.util.ApiConstant;
 import com.vb.mafia.api.util.ApiUtil;
+import com.vb.mafia.core.constant.ModuleType;
 import com.vb.mafia.core.util.HttpUtil;
 import com.vb.mafia.core.util.JsonUtil;
 import org.junit.Test;
@@ -22,6 +23,7 @@ public class ApiControllerTest {
     {
         DemoGetListReq req = new DemoGetListReq();
         req.setName("test");
+        req.setModuleType(ModuleType.DEFAULT.name());
         this.post(ApiConstant.METHOD_DEMO_GET_LIST, req);
     }
 

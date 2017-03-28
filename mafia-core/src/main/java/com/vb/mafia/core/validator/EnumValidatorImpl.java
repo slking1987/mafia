@@ -12,7 +12,7 @@ public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, Str
 
     @Override
     public void initialize(EnumValidator enumValidator) {
-        valueList = new ArrayList<String>();
+        valueList = new ArrayList<>();
         Class<? extends Enum<?>> enumClass = enumValidator.enumClazz();
 
         @SuppressWarnings("rawtypes")
@@ -20,7 +20,7 @@ public class EnumValidatorImpl implements ConstraintValidator<EnumValidator, Str
 
         for(@SuppressWarnings("rawtypes") Enum enumVal : enumValArr)
         {
-            valueList.add(enumVal.toString());
+            valueList.add(enumVal.name());
         }
     }
 
