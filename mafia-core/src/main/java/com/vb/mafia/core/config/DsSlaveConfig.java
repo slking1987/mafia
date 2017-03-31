@@ -35,10 +35,6 @@ public class DsSlaveConfig {
     public DataSource mafSlaveDataSource() {
         logger.info("----- MAFIA slave data source INIT -----");
         DruidDataSource ds = new DruidDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl(env.getProperty("ds.xms.slave.url"));
-        ds.setUsername(env.getProperty("ds.xms.slave.username"));
-        ds.setPassword(env.getProperty("ds.xms.slave.password"));
         try {
             ds.setFilters(env.getProperty("ds.filters"));
         } catch (SQLException e) {

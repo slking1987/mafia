@@ -37,10 +37,6 @@ public class DsMasterConfig {
     public DataSource mafMasterDataSource() {
         logger.info("----- MAFIA master data source INIT -----");
         DruidDataSource ds = new DruidDataSource();
-        ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl(env.getProperty("ds.xms.master.url"));
-        ds.setUsername(env.getProperty("ds.xms.master.username"));
-        ds.setPassword(env.getProperty("ds.xms.master.password"));
         try {
             ds.setFilters(env.getProperty("ds.filters"));
         } catch (SQLException e) {

@@ -51,9 +51,9 @@ public class LogService {
     private void infoPri(Class<?> clazz, String idx, ModuleType moduleType, String code, Object msgObj)
     {
         String msg = StringUtils.EMPTY;
-        if(msgObj != null && !(msgObj instanceof String))
+        if(msgObj != null)
         {
-            msg = JsonUtil.writeValueQuite(msgObj);
+            msg = msgObj instanceof String ? (String) msgObj : JsonUtil.writeValueQuite(msgObj);
         }
         this.getLogger(clazz).info(FORMAT, idx, this.getModuleTypeDesc(moduleType), code, msg);
     }
