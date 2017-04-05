@@ -5,21 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Cover Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
+    <title>MAFIA spring boot</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/css/cover.css" rel="stylesheet">
+    <link href="/css/mafia.css" rel="stylesheet">
     <style type="text/css">
-    body {
-        margin: 0;
-        background-image: url('/images/welcome_bg.jpg');
-        background-repeat:no-repeat;
-        background-position:0% 0%;
-        background-size:cover;
-        background-color: #22C3AA;
-    }
+        #main{ width:100%;height:100%;background:#000}
     </style>
 </head>
 <body>
@@ -35,26 +25,22 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">HOME</a>
+            </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Help</a>
-            </li>
-            <!--
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#">Disabled</a>
+                <a class="nav-link" href="#">PM2.5<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                <a class="nav-link dropdown-toggle" href="#" id="nav_help" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">HELP</a>
+                <div class="dropdown-menu" aria-labelledby="nav_help">
+                    <a class="dropdown-item" href="#">API</a>
+                    <a class="dropdown-item" href="#">README</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">CONTACT</a>
                 </div>
             </li>
-            -->
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
@@ -62,53 +48,24 @@
         </form>
     </div>
 </nav>
+<div id="main"></div>
 <div class="mastfoot">
     <div class="inner">
         <p>Present by <a href="https://github.com/slking1987/mafia">slking1987@hotmail.com</a></p>
     </div>
 </div>
-<!--
-<div class="site-wrapper">
-
-    <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand">MAFIA <small>spring boot api</small></h3>
-                    <nav class="nav nav-masthead">
-                        <a class="nav-link active" href="#">Home</a>
-                        <a class="nav-link" href="#">Features</a>
-                        <a class="nav-link" href="#">Contact</a>
-                    </nav>
-                </div>
-            </div>
-
-            <div class="inner cover">
-                <h1 class="cover-heading">Cover your page.</h1>
-                <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download,
-                    edit the text, and add your own fullscreen background photo to make it your own.</p>
-                <p class="lead">
-                    <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
-                </p>
-            </div>
-
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Present by <a href="#">slking</a></p>
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
--->
 
 <script type="text/javascript" src="/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="/js/tether.min.js"></script>
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/echarts.js"></script>
+<script type="text/javascript" src="/js/china.js"></script>
+<script type="text/javascript" src="/js/pm.js"></script>
+<script>
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.showLoading();//加载数据前显示的动画效果
+    myChart.setOption(option);
+    myChart.hideLoading();//加载数据完成后隐藏动画
+</script>
 </body>
 </html>
