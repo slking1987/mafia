@@ -10,6 +10,7 @@
         <module>mafia-interface</module>
         <module>mafia-srv-demo</module>
         <module>mafia-portal</module>
+        <module>mafia-srv-aqi</module>
     </modules>
     <groupId>com.vb.mafia</groupId>
     <artifactId>mafia</artifactId>

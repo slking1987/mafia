@@ -1,7 +1,8 @@
 package com.vb.mafia.srv.demo.service;
 
-import com.vb.mafia.core.test.MafiaTest;
-import com.vb.mafia.srv.demo.dao.entity.MafiaAdmin;
+import com.mafia.core.test.MafiaTest;
+import com.mafia.srv.demo.dao.entity.MafiaAdmin;
+import com.mafia.srv.demo.service.MafiaAdminService;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
