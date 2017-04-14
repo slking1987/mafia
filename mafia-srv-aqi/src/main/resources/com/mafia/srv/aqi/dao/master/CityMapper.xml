@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Config 3.1//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mafia.srv.aqi.dao.master.CityMapper">
+
+    <insert id="insertBatch" parameterType="list">
+        INSERT INTO city(
+            id,level,lon,lat,
+            city_en,city_zh,leader_en,leader_zh,province_en,province_zh,
+            country_code,country_en,country_zh)
+        VALUES
+        <foreach collection='list' item='item' index='index' separator=','>
+            (
+                #{item.id},#{item.level},#{item.lon},#{item.lat},
+                #{item.cityEn},#{item.cityZh},#{item.leaderEn},#{item.leaderZh},#{item.provinceEn},#{item.provinceZh},
+                #{item.countryCode},#{item.countryEn},#{item.countryZh}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

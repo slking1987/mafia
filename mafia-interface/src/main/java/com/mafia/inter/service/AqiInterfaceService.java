@@ -1,17 +1,23 @@
 package com.mafia.inter.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Preconditions;
 import com.mafia.core.config.UrlConfig;
+import com.mafia.core.constant.AqiLevel;
+import com.mafia.core.constant.RespCode;
+import com.mafia.core.exception.MafiaInterfaceException;
+import com.mafia.core.log.LogService;
 import com.mafia.core.util.DateUtil;
 import com.mafia.core.util.HttpUtil;
 import com.mafia.core.util.JsonUtil;
-import com.mafia.inter.request.AqiReq;
-import com.mafia.inter.response.AqiItem;
+import com.mafia.inter.request.HeReq;
+import com.mafia.inter.response.*;
+import com.mafia.inter.vo.AqiVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -21,35 +27,49 @@ import java.util.List;
 @Service
 public class AqiInterfaceService {
 
-    private static final String METHOD_GET_ALL = "/querys/aqi_ranking.json";
+    private static final Class LOG_CLASS = AqiInterfaceService.class;
+
+    private static final String METHOD_GET_WEATHER = "/v5/weather";
+    private static final String SUCCESS_CODE = "ok";
 
     @Autowired
     private UrlConfig urlConfig;
+    @Autowired
+    private LogService logService;
 
-    public List<AqiItem> getAllCityAqiInfo() throws Exception {
-        String url = urlConfig.getAqi() + METHOD_GET_ALL;
-        AqiReq aqiReq = new AqiReq();
-        aqiReq.setToken(urlConfig.getAqi_key());
+    public AqiVO getApiItemByCity(String cityCode) throws Exception {
+        Preconditions.checkArgument(StringUtils.isNotEmpty(cityCode), "cityCode is empty");
 
-        String respStr = HttpUtil.httpGetRequest(url, aqiReq);
+        AqiVO vo = new AqiVO();
+        String url = urlConfig.getHe_aqi() + METHOD_GET_WEATHER;
+        HeReq req = new HeReq();
+        req.setKey(urlConfig.getHe_aqi_key());
+        req.setCity(cityCode);
+
+        String respStr = HttpUtil.httpGetRequest(url, req);
         if(StringUtils.isEmpty(respStr)) {
-            throw new Exception("resp empty");
+            throw new MafiaInterfaceException(RespCode.INTERFACE_COMMON_ERROR_RESP_EMPTY);
         }
-        JsonNode node = JsonUtil.getObjectMapper().readTree(respStr);
-        JsonNode errorNode = node.findPath("error");
-        if(errorNode != null) {
-            throw new Exception("resp error:" + errorNode.asText());
+        HeResp resp = JsonUtil.parse(respStr, HeResp.class);
+        if(resp == null || resp.getHeWeather5() == null || resp.getHeWeather5().isEmpty()) {
+            throw new MafiaInterfaceException(RespCode.INTERFACE_COMMON_ERROR_RESP_FORMAT);
+        }
+        HeRespItem respItem = resp.getHeWeather5().get(0);
+        if(StringUtils.isEmpty(respItem.getStatus()) || !SUCCESS_CODE.equals(respItem.getStatus())) {
+            throw new MafiaInterfaceException(RespCode.INTERFACE_COMMON_FAILED);
+        } else if(respItem.getAqi() == null || respItem.getAqi().getCity() == null) {
+            logService.info(LOG_CLASS, "no aqi info for " + cityCode);
+        } else {
+            HeAqiItem aqi = respItem.getAqi().getCity();
+            HeBasic basic = respItem.getBasic();
+            vo.setAqi(aqi.getAqi());
+            vo.setPm25(aqi.getPm25());
+            vo.setCityId(basic.getId());
+            vo.setCityDesc(basic.getCity());
+            vo.setAqiLevel(AqiLevel.getByDesc(aqi.getQlty()));
+            vo.setTime(DateUtil.str2Date(basic.getUpdate().getLoc() + ":00"));
         }
 
-        List<AqiItem> list = JsonUtil.parse(respStr, new TypeReference<List<AqiItem>>() {});
-        list.forEach(item -> {
-            String timePoint = item.getTime_point();// 2017-04-06T17:00:00Z
-            if(StringUtils.isNotEmpty(timePoint)) {
-                String[] temp = timePoint.split("T");
-                Date date = DateUtil.str2Date(temp[0] + " " + temp[1].substring(0, temp[1].length() -1));
-                item.setTime(date);
-            }
-        });
-        return list;
+        return vo;
     }
 }

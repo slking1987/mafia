@@ -12,22 +12,22 @@ import org.springframework.stereotype.Component;
 @Configuration
 @ConfigurationProperties(prefix = ConfigConstant.PREFIX_URL)
 public class UrlConfig {
-    private String aqi;
-    private String aqi_key;
+    private String he_aqi;
+    private String he_aqi_key;
 
-    public String getAqi() {
-        return aqi;
+    public String getHe_aqi() {
+        return he_aqi;
     }
 
-    public void setAqi(String aqi) {
-        this.aqi = aqi;
+    public void setHe_aqi(String he_aqi) {
+        this.he_aqi = he_aqi;
     }
 
-    public String getAqi_key() {
-        return aqi_key;
+    public String getHe_aqi_key() {
+        return he_aqi_key;
     }
 
-    public void setAqi_key(String aqi_key) {
-        this.aqi_key = aqi_key;
+    public void setHe_aqi_key(String he_aqi_key) {
+        this.he_aqi_key = he_aqi_key;
     }
 }

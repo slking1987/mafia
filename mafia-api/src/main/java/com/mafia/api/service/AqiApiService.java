@@ -13,6 +13,6 @@ public class AqiApiService {
     private AqiService aqiService;
 
     public void refresh(String bodyStr) throws Exception {
-        aqiService.refreshAqi();
+        aqiService.refreshAqiHe();
     }
 }

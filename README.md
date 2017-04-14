@@ -53,4 +53,3 @@ mafia-srv-* 业务模块，可自行扩展，编写具体的业务逻辑实现
 ### 10.待开发
 1.集成 freemarker 提供简易 portal  doing   
 2.配置文件中敏感信息加密   
-3.package名称调整

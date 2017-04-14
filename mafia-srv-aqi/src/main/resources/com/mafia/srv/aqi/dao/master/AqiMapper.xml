@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Config 3.1//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mafia.srv.aqi.dao.master.AqiMapper">
+
+    <insert id="insertBatch" parameterType="list">
+        INSERT INTO aqi(
+            city_id,city_desc,time,date,aqi,aqi_level,create_time)
+        VALUES
+        <foreach collection='list' item='item' index='index' separator=','>
+            (
+                #{item.cityId},#{item.cityDesc},#{item.time},#{item.date},#{item.aqi},#{item.aqiLevel},#{item.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="searchList" resultType="com.mafia.srv.aqi.dao.entity.Aqi" parameterType="com.mafia.srv.aqi.vo.AqiSearchVO">
+        SELECT a.*,c.lon as lon,c.lat as lat
+        FROM aqi a
+        LEFT JOIN city c ON a.city_id=c.id
+        WHERE 1=1
+        <if test="searchVO.cityLevel != null">
+            AND c.level = #{searchVO.cityLevel}
+        </if>
+        <if test="searchVO.date != null">
+            AND a.date = #{searchVO.date}
+        </if>
+        <if test="searchVO.createTime != null">
+            AND a.create_time = #{searchVO.createTime}
+        </if>
+        ORDER BY a.aqi DESC
+    </select>
+
+</mapper>

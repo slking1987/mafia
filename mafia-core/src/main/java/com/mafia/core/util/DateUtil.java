@@ -33,6 +33,13 @@ public abstract class DateUtil {
         return date;
     }
 
+    public static String date2str(Date date){
+        if(date == null){
+            return StringUtils.EMPTY;
+        }
+        return DATE_FORMATTER.format(date);
+    }
+
     public static Integer getEarliestTimeInt(Date date) {
         return date2Int(getEarliestTime(date));
     }

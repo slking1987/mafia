@@ -9,7 +9,7 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/mafia.css" rel="stylesheet">
     <style type="text/css">
-        #main{ width:100%;height:100%;}
+        #aqiGraphDiv{ width:100%;height:100%; }
     </style>
 </head>
 <body>
@@ -20,7 +20,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="#">MAFIA
-        <small> spring boot</small>
+        <small> air quality index</small>
     </a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
@@ -29,7 +29,7 @@
                 <a class="nav-link" href="#">HOME</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">PM2.5<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">AQI</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="nav_help" data-toggle="dropdown"
@@ -48,7 +48,7 @@
         </form>
     </div>
 </nav>
-<div id="main"></div>
+<div id="aqiGraphDiv"></div>
 <div class="mastfoot">
     <div class="inner">
         <p>Present by <a href="https://github.com/slking1987/mafia">slking1987@hotmail.com</a></p>
@@ -59,12 +59,7 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/echarts.js"></script>
 <script type="text/javascript" src="/js/china.js"></script>
+<script type="text/javascript" src="/js/heilongjiang.js"></script>
 <script type="text/javascript" src="/js/aqi.js"></script>
-<script>
-    var myChart = echarts.init(document.getElementById('main'));
-    myChart.showLoading();
-    myChart.setOption(option);
-    myChart.hideLoading();
-</script>
 </body>
 </html>

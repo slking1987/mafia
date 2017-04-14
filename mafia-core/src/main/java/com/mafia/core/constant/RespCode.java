@@ -13,6 +13,11 @@ public enum RespCode {
     API_COMMON_ERROR_HTTP_GET_FORBID(1005, "api.common.error.httpGetForbid", "HTTP GET请求屏蔽"),
     API_COMMON_ERROR_SEC_CONF_NOT_FOUND(1006, "api.common.error.secConfNotFound", "安全配置项不存在"),
 
+    // 8000-8999 INTERFACE
+    INTERFACE_COMMON_ERROR_RESP_EMPTY(8001, "interface.common.error.respEmpty", "返回消息为空"),
+    INTERFACE_COMMON_ERROR_RESP_FORMAT(8002, "interface.common.error.respFormat", "返回消息格式错误"),
+    INTERFACE_COMMON_FAILED(8003, "interface.common.failed", "调用失败"),
+
     // 9000-9999 EXCEPTION
     EXP_IO(9001, "exp.io", "io exception"),
     EXP_RUNTIME(9002, "exp.runtime", "runtime exception"),
