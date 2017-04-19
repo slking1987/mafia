@@ -17,6 +17,9 @@ public class AqiGraphVO {
 
     private String updateTime;
     private String mapId;
+    private String mapDesc;
+
+    private List<String> subMapDescList;
 
     public List<AqiGraphItem> getFullList() {
         return fullList;
@@ -96,5 +99,21 @@ public class AqiGraphVO {
 
     public void setMapId(String mapId) {
         this.mapId = mapId;
+    }
+
+    public String getMapDesc() {
+        return mapDesc;
+    }
+
+    public void setMapDesc(String mapDesc) {
+        this.mapDesc = mapDesc;
+    }
+
+    public List<String> getSubMapDescList() {
+        return subMapDescList;
+    }
+
+    public void setSubMapDescList(List<String> subMapDescList) {
+        this.subMapDescList = subMapDescList;
     }
 }

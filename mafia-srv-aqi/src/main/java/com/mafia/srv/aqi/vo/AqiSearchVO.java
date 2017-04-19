@@ -9,6 +9,7 @@ public class AqiSearchVO {
     private Integer cityLevel;
     private Integer date;
     private Date createTime;
+    private String provinceEn;
 
     public Integer getCityLevel() {
         return cityLevel;
@@ -32,5 +33,13 @@ public class AqiSearchVO {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getProvinceEn() {
+        return provinceEn;
+    }
+
+    public void setProvinceEn(String provinceEn) {
+        this.provinceEn = provinceEn;
     }
 }

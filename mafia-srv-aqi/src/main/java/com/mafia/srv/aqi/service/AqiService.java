@@ -13,13 +13,16 @@ import com.mafia.srv.aqi.dao.entity.Aqi;
 import com.mafia.srv.aqi.dao.entity.City;
 import com.mafia.srv.aqi.dao.master.AqiMapper;
 import com.mafia.srv.aqi.dao.master.CityMapper;
+import com.mafia.srv.aqi.util.GraphMap;
 import com.mafia.srv.aqi.vo.AqiGraphItem;
 import com.mafia.srv.aqi.vo.AqiGraphVO;
 import com.mafia.srv.aqi.vo.AqiSearchVO;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -88,14 +91,17 @@ public class AqiService {
      * AqiGraphItem eg. '海门':[121.15,31.89,90]
      * @return
      */
-    public AqiGraphVO getGraphData() {
-        AqiGraphVO vo = new AqiGraphVO();
+    public AqiGraphVO getGraphData(String mapDesc) {
+        GraphMap graphMap = GraphMap.CHINA;
+        if(StringUtils.isNotEmpty(mapDesc) && GraphMap.getByDesc(mapDesc) != null) {
+            graphMap = GraphMap.getByDesc(mapDesc);
+        }
 
         Date maxCreateTime = aqiMapper.getMaxCreateTime();
-
         AqiSearchVO searchVO = new AqiSearchVO();
         // searchVO.setCityLevel(3);
         searchVO.setCreateTime(maxCreateTime);
+        searchVO.setProvinceEn(graphMap.getDbCode());
         List<Aqi> aqiList = aqiMapper.searchList(searchVO);
         Map<Integer, List<Aqi>> aqiLevelMap = aqiList.stream().collect((Collectors.groupingBy(Aqi::getAqiLevel)));
 
@@ -114,6 +120,7 @@ public class AqiService {
         fullList.addAll(severelyPollutedList);
         List<AqiGraphItem> top5List = this.genAqiGraphItemList(aqiList.subList(0, aqiList.size() < 5 ? aqiList.size() : 5));
 
+        AqiGraphVO vo = new AqiGraphVO();
         vo.setFullList(fullList);
         vo.setTopList(top5List);
         vo.setGoodList(goodList);
@@ -122,8 +129,12 @@ public class AqiService {
         vo.setModeratePollutedList(moderatePollutedList);
         vo.setHeavilyPollutedList(heavilyPollutedList);
         vo.setSeverelyPollutedList(severelyPollutedList);
-        vo.setMapId("china");
+        vo.setMapId(graphMap.getCode());
+        vo.setMapDesc(graphMap.getDesc());
         vo.setUpdateTime(DateUtil.date2str(maxCreateTime));
+
+        List<String> subMapDescList = Arrays.stream(GraphMap.values()).map(GraphMap::getDesc).collect(Collectors.toList());
+        vo.setSubMapDescList(subMapDescList);
 
         return vo;
     }

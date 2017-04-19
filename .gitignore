@@ -33,3 +33,6 @@ rebel.xml
 *.txt
 .recommenders/
 .bpmn/
+
+#SVN
+*.svn

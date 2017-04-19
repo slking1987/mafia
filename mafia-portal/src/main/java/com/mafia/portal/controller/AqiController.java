@@ -25,8 +25,8 @@ public class AqiController {
 
     @RequestMapping(value = "/getGraphData", method = RequestMethod.GET)
     @ResponseBody
-    public AqiGraphVO getGraphData() {
-        logService.debug(LOG_CLASS, "[aqi] get graph data");
-        return aqiService.getGraphData();
+    public AqiGraphVO getGraphData(String mapDesc) {
+        logService.info(LOG_CLASS, "[aqi] get graph data mapDesc:" + mapDesc);
+        return aqiService.getGraphData(mapDesc);
     }
 }

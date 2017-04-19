@@ -8,7 +8,7 @@ public class HeAqiItem {
     private Integer co;
     private Integer no2;
     private Integer o3;
-    private Integer pm10;
+    private String pm10;
     private Integer pm25;
     private Integer so2;
     private String qlty;
@@ -45,11 +45,11 @@ public class HeAqiItem {
         this.o3 = o3;
     }
 
-    public Integer getPm10() {
+    public String getPm10() {
         return pm10;
     }
 
-    public void setPm10(Integer pm10) {
+    public void setPm10(String pm10) {
         this.pm10 = pm10;
     }
 

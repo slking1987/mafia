@@ -27,6 +27,9 @@
         <if test="searchVO.createTime != null">
             AND a.create_time = #{searchVO.createTime}
         </if>
+        <if test="searchVO.provinceEn != null and searchVO.provinceEn != ''">
+            AND c.province_en = #{searchVO.provinceEn}
+        </if>
         ORDER BY a.aqi DESC
     </select>
 
