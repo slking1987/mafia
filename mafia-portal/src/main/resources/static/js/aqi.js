@@ -247,7 +247,7 @@ function loadMap(mapDesc) {
                 ]
             };
 
-            aqiChart.setOption(option);
+            aqiChart.setOption(option, true);
         }
     );
 }

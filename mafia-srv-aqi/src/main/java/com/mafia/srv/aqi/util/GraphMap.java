@@ -18,7 +18,32 @@ public enum GraphMap {
     SHANXI1("shan-xi", "陕西", "shan-xi"),
     NEIMENGGU("neimenggu", "内蒙古", "neimenggu"),
     GUANGDONG("guangdong", "广东", "guangdong"),
-    FUJAIN("fujian", "福建", "fujian")
+    FUJAIN("fujian", "福建", "fujian"),
+    ANHUI("anhui", "安徽", "anhui"),
+    AOMEN("aomen", "澳门", "aomen"),
+    CHONGQING("chongqing", "重庆", "chongqing"),
+    GANSU("gansu", "甘肃", "gansu"),
+    GUANGXI("guangxi", "广西", "guangxi"),
+    GUIZHOU("guizhou", "贵州", "guizhou"),
+    HAINAN("hainan", "海南", "hainan"),
+    HENAN("henan", "河南", "henan"),
+    HUBEI("hubei", "湖北", "hubei"),
+    HUNAN("hunan", "湖南", "hunan"),
+    JIANGSU("jiangsu", "江苏", "jiangsu"),
+    JIANGXI("jiangxi", "江西", "jiangxi"),
+    JILIN("jilin", "吉林", "jilin"),
+    LIAONING("liaoning", "辽宁", "liaoning"),
+    NINGXIA("ningxia", "宁夏", "ningxia"),
+    QINGHAI("qinghai", "青海", "qinghai"),
+    SHANGHAI("shanghai", "上海", "shanghai"),
+    SICHUAN("sichuan", "四川", "sichuan"),
+    TAIWAN("taiwan", "台湾", "taiwan"),
+    TIANJIN("tianjin", "天津", "tianjin"),
+    XIANGGANG("xianggang", "香港", "xianggang"),
+    XINJIANG("xinjiang", "新疆", "xinjiang"),
+    XIZANG("xizang", "西藏", "xizang"),
+    YUNNAN("yunnan", "云南", "yunnan"),
+    ZHEJIANG("zhejiang", "浙江", "zhejiang")
     ;
     private String code;
     private String desc;

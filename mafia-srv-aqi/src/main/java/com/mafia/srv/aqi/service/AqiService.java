@@ -92,6 +92,7 @@ public class AqiService {
      * @return
      */
     public AqiGraphVO getGraphData(String mapDesc) {
+        logService.info(LOG_CLASS, ModuleType.SRV_AQI, "[Perf-Info], getGraphData begin");
         GraphMap graphMap = GraphMap.CHINA;
         if(StringUtils.isNotEmpty(mapDesc) && GraphMap.getByDesc(mapDesc) != null) {
             graphMap = GraphMap.getByDesc(mapDesc);
@@ -103,6 +104,7 @@ public class AqiService {
         searchVO.setCreateTime(maxCreateTime);
         searchVO.setProvinceEn(graphMap.getDbCode());
         List<Aqi> aqiList = aqiMapper.searchList(searchVO);
+        logService.info(LOG_CLASS, ModuleType.SRV_AQI, "[Perf-Info], get data from db end");
         Map<Integer, List<Aqi>> aqiLevelMap = aqiList.stream().collect((Collectors.groupingBy(Aqi::getAqiLevel)));
 
         List<AqiGraphItem> goodList = this.genAqiGraphItemList(aqiLevelMap.get(AqiLevel.GOOD.getCode()));
@@ -135,7 +137,7 @@ public class AqiService {
 
         List<String> subMapDescList = Arrays.stream(GraphMap.values()).map(GraphMap::getDesc).collect(Collectors.toList());
         vo.setSubMapDescList(subMapDescList);
-
+        logService.info(LOG_CLASS, ModuleType.SRV_AQI, "[Perf-Info], getGraphData end");
         return vo;
     }
 
