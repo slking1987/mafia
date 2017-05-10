@@ -51,5 +51,5 @@ mafia-srv-* 业务模块，可自行扩展，编写具体的业务逻辑实现
 实现枚举类需要实现接口MafEnum，然后将枚举类添加到`mybatis-config.xml`中，实现id到枚举类型的转换
 
 ### 10.待开发
-1.集成 freemarker 提供简易 portal  doing   
+1.集成 freemarker 提供简易 portal `slking1987.com 全国AQI报告, 功能待进一步完善`   
 2.配置文件中敏感信息加密   

@@ -16,7 +16,7 @@ import org.springframework.util.Base64Utils;
  */
 public class ApiControllerTest {
 
-    private static final String LOCAL_URL = "http://localhost:8080/api";
+    private static final String LOCAL_URL = "http://slking1987.com/api";
 
     @Test
     public void testDemoGetList() {
